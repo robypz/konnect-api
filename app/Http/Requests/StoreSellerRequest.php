@@ -22,7 +22,14 @@ class StoreSellerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8',
+            'password_confirmation' => 'required|same:password',
+            'tax_id' => 'required|unique:sellers,tax_id',
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'tax_id' => 'required',
         ];
     }
 }

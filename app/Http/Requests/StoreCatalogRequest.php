@@ -22,7 +22,10 @@ class StoreCatalogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'settings' => 'required',
+            'description' => 'required',
+            'logo' => 'required|image',
         ];
     }
 }
