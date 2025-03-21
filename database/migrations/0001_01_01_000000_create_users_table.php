@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $collection) {
             $collection->string('name');
+            $collection->string('last_name');
+            $collection->string('nickname')->unique();
             $collection->string('email')->unique();
             $collection->timestamp('email_verified_at')->nullable();
             $collection->string('password');
+
             $collection->rememberToken();
             $collection->timestamps();
         });

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use MongoDB\Laravel\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use MongoDB\Laravel\Relations\BelongsToMany;
 use MongoDB\Laravel\Relations\HasMany;
 use MongoDB\Laravel\Relations\HasOne;
 use Spatie\Permission\Traits\HasRoles;
@@ -57,15 +58,21 @@ class User extends Authenticatable
     }
 
     //groups
-    public function groups(): HasMany
+    public function groups(): BelongsToMany
     {
-        return $this->hasMany(Group::class);
+        return $this->belongsToMany(Group::class);
     }
 
     //events
     public function events(): HasMany
     {
         return $this->hasMany(Event::class);
+    }
+
+    //posts
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
     }
 
 }

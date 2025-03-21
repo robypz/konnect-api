@@ -16,4 +16,16 @@ class Deparment extends Model
     {
         return $this->hasMany(Employee::class);
     }
+
+    //has many posts
+    public function posts() : HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    //has many events
+    public function events() : HasMany
+    {
+        return $this->hasMany(Event::class);
+    }
 }

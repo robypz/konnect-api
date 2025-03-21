@@ -29,4 +29,10 @@ class Project extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    //has many events
+    public function events() : HasMany
+    {
+        return $this->hasMany(Event::class);
+    }
 }

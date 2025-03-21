@@ -16,4 +16,16 @@ class Event extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    //belongs to department
+    public function department() : BelongsTo
+    {
+        return $this->belongsTo(Deparment::class);
+    }
+
+    //belongs to projects
+    public function project() : BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
 }
