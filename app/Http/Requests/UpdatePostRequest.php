@@ -22,7 +22,13 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string'],
+            //multimédia
+            'media' => 'required|file|mimetypes:image/jpeg,image/png,image/gif,video/mp4,video/mpeg|max:10240',
+            //attachments
+            'attachments' => 'nullable|array',
+            'attachments.*' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,txt|max:10240',
         ];
     }
 }
