@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $collection) {
             $collection->id();
+            $collection->string('name');
+            $collection->string('description');
+            $collection->date('date');
+            $collection->string('location');
+            $collection->string('link');
             $collection->timestamps();
         });
     }

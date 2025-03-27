@@ -15,7 +15,6 @@ return new class extends Migration
             $collection->id();
             $collection->string('name');
             $collection->string('description');
-
             $collection->timestamps();
         });
     }

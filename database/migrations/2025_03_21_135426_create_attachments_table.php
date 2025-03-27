@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use MongoDB\Laravel\Schema\Blueprint;
 
 return new class extends Migration
 {
@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attachments', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('attachments', function (Blueprint $collection) {
+            $collection->id();
+            $collection->string('name');
+            $collection->string('path');
+            $collection->string('type');
+            $collection->timestamps();
         });
     }
 

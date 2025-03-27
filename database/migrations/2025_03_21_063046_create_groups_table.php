@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $collection) {
             $collection->id();
-
+            $collection->string('name');
+            $collection->string('description');
             $collection->timestamps();
         });
     }

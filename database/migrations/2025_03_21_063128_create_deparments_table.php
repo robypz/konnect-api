@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('deparments', function (Blueprint $collection) {
             $collection->id();
             $collection->string('name');
+            $collection->string('description');
             $collection->timestamps();
         });
     }
