@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $collection) {
             $collection->id();
-            $collection->string('position');
+            $collection->string('job');
             $collection->timestamps();
         });
     }

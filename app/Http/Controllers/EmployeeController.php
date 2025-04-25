@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use App\Models\User;
 
 class EmployeeController extends Controller
 {
@@ -29,7 +30,25 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployeeRequest $request)
     {
-        //
+        $user = new User();
+        $user->name = $request->name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        $employee = new Employee();
+        $employee->user_id = $user->id;
+        $employee->job = $request->job;
+        $employee->department_id = $request->department_id;
+
+        if ($request->hasFile('profile_photo')) {
+            $employee->profile_photo = $request->file('profile_photo')->store('profile_photos', 'public');
+        }
+
+        $employee->save();
+
+        return response()->json($employee, 201);
     }
 
     /**
