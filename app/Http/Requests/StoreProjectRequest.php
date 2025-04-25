@@ -24,6 +24,8 @@ class StoreProjectRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
+            'status' => 'required|exists:status,id',
+            'deadline' => 'required|date',
             'employees_ids' => 'nullable|array',
             'employees_ids.*' => 'exists:employees,id',
         ];
