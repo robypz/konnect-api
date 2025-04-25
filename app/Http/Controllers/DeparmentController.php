@@ -13,23 +13,18 @@ class DeparmentController extends Controller
      */
     public function index()
     {
-        //
+        $deparments = Deparment::all();
+        return response()->json($deparments,200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreDeparmentRequest $request)
     {
-        //
+        $deparment = Deparment::create($request->validated());
+        return response()->json($deparment,201);
     }
 
     /**
@@ -37,15 +32,7 @@ class DeparmentController extends Controller
      */
     public function show(Deparment $deparment)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Deparment $deparment)
-    {
-        //
+        return response()->json($deparment,200);
     }
 
     /**
@@ -53,7 +40,8 @@ class DeparmentController extends Controller
      */
     public function update(UpdateDeparmentRequest $request, Deparment $deparment)
     {
-        //
+        $deparment->update($request->validated());
+        return response()->json($deparment,200);
     }
 
     /**
@@ -61,6 +49,7 @@ class DeparmentController extends Controller
      */
     public function destroy(Deparment $deparment)
     {
-        //
+        $deparment->delete();
+        return response()->json(null,204);
     }
 }
