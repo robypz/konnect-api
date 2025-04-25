@@ -14,15 +14,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $employees = Employee::with(['user', 'department'])->get();
+        return response()->json($employees, 200);
     }
 
     /**
@@ -56,15 +49,8 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Employee $employee)
-    {
-        //
+        $employee->load(['user', 'department']);
+        return response()->json($employee, 200);
     }
 
     /**
@@ -72,7 +58,25 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
-        //
+        $employee->user->name = $request->name;
+        $employee->user->last_name = $request->last_name;
+        $employee->user->email = $request->email;
+
+        if ($request->filled('password')) {
+            $employee->user->password = bcrypt($request->password);
+        }
+
+        if ($request->hasFile('profile_photo')) {
+            $employee->profile_photo = $request->file('profile_photo')->store('profile_photos', 'public');
+        }
+
+        $employee->job = $request->job;
+        $employee->department_id = $request->department_id;
+
+        $employee->user->save();
+        $employee->save();
+
+        return response()->json($employee, 200);
     }
 
     /**
@@ -80,6 +84,9 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee->user->delete();
+        $employee->delete();
+
+        return response()->json(null, 204);
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Relations\HasMany;
 
-class Deparment extends Model
+class Department extends Model
 {
     /** @use HasFactory<\Database\Factories\DeparmentFactory> */
     use HasFactory;

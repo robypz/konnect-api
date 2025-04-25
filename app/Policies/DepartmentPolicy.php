@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Deparment;
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class DeparmentPolicy
+class DepartmentPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class DeparmentPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Deparment $deparment): bool
+    public function view(User $user, Department $deparment): bool
     {
         return false;
     }
@@ -35,7 +35,7 @@ class DeparmentPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Deparment $deparment): bool
+    public function update(User $user, Department $deparment): bool
     {
         return false;
     }
@@ -43,7 +43,7 @@ class DeparmentPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Deparment $deparment): bool
+    public function delete(User $user, Department $deparment): bool
     {
         return false;
     }
@@ -51,7 +51,7 @@ class DeparmentPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Deparment $deparment): bool
+    public function restore(User $user, Department $deparment): bool
     {
         return false;
     }
@@ -59,7 +59,7 @@ class DeparmentPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Deparment $deparment): bool
+    public function forceDelete(User $user, Department $deparment): bool
     {
         return false;
     }

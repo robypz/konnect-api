@@ -11,7 +11,7 @@ class StoreEmployeeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +26,7 @@ class StoreEmployeeRequest extends FormRequest
             'last_name' => 'required|string|max:50',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
-            'department' => 'required|string|exists:departments,id',
+            'department_id' => 'required|string|exists:departments,id',
             'job' => 'required|string|max:255',
             'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];

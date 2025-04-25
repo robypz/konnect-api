@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Deparment;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Department;
 use Illuminate\Database\Seeder;
 
-class DeparmentSeeder extends Seeder
+class DepartmentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +13,7 @@ class DeparmentSeeder extends Seeder
     public function run(): void
     {
 
-        Deparment::create([
+        Department::create([
             'name' => 'Test Deparment',
             'description' => 'Test Deparment Description',
         ]);

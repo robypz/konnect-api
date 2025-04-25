@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Deparment;
-use App\Http\Requests\StoreDeparmentRequest;
-use App\Http\Requests\UpdateDeparmentRequest;
+use App\Models\Department;
 
-class DeparmentController extends Controller
+use App\Http\Requests\StoreDepartmentRequest;
+use App\Http\Requests\UpdateDepartmentRequest;
+
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $deparments = Deparment::all();
+        $deparments = Department::all();
         return response()->json($deparments,200);
     }
 
@@ -21,16 +22,16 @@ class DeparmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDeparmentRequest $request)
+    public function store(StoreDepartmentRequest $request)
     {
-        $deparment = Deparment::create($request->validated());
+        $deparment = Department::create($request->validated());
         return response()->json($deparment,201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Deparment $deparment)
+    public function show(Department $deparment)
     {
         return response()->json($deparment,200);
     }
@@ -38,7 +39,7 @@ class DeparmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDeparmentRequest $request, Deparment $deparment)
+    public function update(UpdateDepartmentRequest $request, Department $deparment)
     {
         $deparment->update($request->validated());
         return response()->json($deparment,200);
@@ -47,7 +48,7 @@ class DeparmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Deparment $deparment)
+    public function destroy(Department $deparment)
     {
         $deparment->delete();
         return response()->json(null,204);

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Relations\BelongsTo;
 use MongoDB\Laravel\Relations\BelongsToMany;
 
@@ -21,7 +21,7 @@ class Employee extends Model
     //belongs to department
     public function department() : BelongsTo
     {
-        return $this->belongsTo(Deparment::class);
+        return $this->belongsTo(Department::class);
     }
 
     //belogn to many projects
