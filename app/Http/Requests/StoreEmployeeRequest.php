@@ -28,7 +28,7 @@ class StoreEmployeeRequest extends FormRequest
             'password' => 'required|string|min:8|confirmed',
             'department_id' => 'required|string|exists:departments,id',
             'job' => 'required|string|max:255',
-            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'profile_photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }
