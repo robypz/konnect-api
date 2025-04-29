@@ -17,19 +17,26 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $project = new Project();
+        $project->name = $request->name;
+        $project->description = $request->description;
+        $project->deadline = $request->deadline;
+        $project->status = $request->status;
+
+        if ($request->has('employees')) {
+            $employee_ids = [];
+            foreach ($request->employees as $employee) {
+                $employee_ids[] = $employee['id'];
+            }
+        }
+
+        $project->save();
+
+        return response()->json($project, 201);
     }
 
     /**
