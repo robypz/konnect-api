@@ -14,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::with(['user', 'department'])->get();
+        $employees = Employee::with(['user', 'department'])->cursorPaginate();
         return response()->json($employees, 200);
     }
 
@@ -88,5 +88,20 @@ class EmployeeController extends Controller
         $employee->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function search($search){
+        $employees = Employee::with(['user', 'department'])
+            ->whereHas('user', function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%")
+                    ->orWhere('last_name', 'like', "%$search%")
+                    ->orWhere('email', 'like', "%$search%");
+            })
+            ->orWhereHas('department', function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%");
+            })
+            ->cursorPaginate();
+
+        return response()->json($employees, 200);
     }
 }
