@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Relations\BelongsToMany;
 use MongoDB\Laravel\Relations\HasMany;
 
@@ -34,5 +34,11 @@ class Project extends Model
     public function events() : HasMany
     {
         return $this->hasMany(Event::class);
+    }
+
+    //Has one status
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 }

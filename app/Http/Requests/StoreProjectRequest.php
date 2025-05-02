@@ -11,7 +11,7 @@ class StoreProjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,10 +24,13 @@ class StoreProjectRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'status' => 'required|exists:status,id',
-            'deadline' => 'required|date',
-            'employees_ids' => 'nullable|array',
-            'employees_ids.*' => 'exists:employees,id',
+            'status_id' => 'required|exists:status,id',
+            'progress' => 'required|integer|min:0|max:100',
+            'deadline' => 'required|date|after:today',
+            //'deparmentment_id' => 'required|exists:departments,id',
+            'status_id' => 'required|exists:statuses,id',
+            'employees' => 'nullable|array',
+            'employees.*.id' => 'exists:employees,id',
         ];
     }
 }

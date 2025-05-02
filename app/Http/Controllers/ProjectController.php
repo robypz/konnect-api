@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Status;
 
 class ProjectController extends Controller
 {
@@ -13,7 +14,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::with('status')->get();
+        return response()->json($projects,200);
     }
 
     /**
@@ -25,16 +27,15 @@ class ProjectController extends Controller
         $project->name = $request->name;
         $project->description = $request->description;
         $project->deadline = $request->deadline;
-        $project->status = $request->status;
-
+        $project->progress = $request->progress;
+        $project->department_id = $request->department_id;
+        $project->status_id = $request->status_id;
+        $project->save();
         if ($request->has('employees')) {
-            $employee_ids = [];
             foreach ($request->employees as $employee) {
-                $employee_ids[] = $employee['id'];
+                $project->employees()->attach($employee['id']);
             }
         }
-
-        $project->save();
 
         return response()->json($project, 201);
     }
