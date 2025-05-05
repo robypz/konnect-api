@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProjectController;
@@ -19,3 +20,5 @@ Route::get('employees/search/{search}', [EmployeeController::class, 'search']);
 Route::apiResource('statuses',StatusController::class);
 
 Route::apiResource('projects',ProjectController::class);
+
+Route::apiResource('categories',CategoryController::class);
