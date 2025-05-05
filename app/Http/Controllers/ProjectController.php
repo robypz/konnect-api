@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
-use App\Models\Status;
 
 class ProjectController extends Controller
 {
@@ -45,15 +44,12 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Project $project)
-    {
-        //
+        $project->load('status');
+        $project->load('employees');
+        $project->load('category');
+        $project->load('tasks');
+        $project->load('posts');
+        return response()->json($project, 200);
     }
 
     /**

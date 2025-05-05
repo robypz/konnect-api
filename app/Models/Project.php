@@ -41,4 +41,16 @@ class Project extends Model
     {
         return $this->belongsTo(Status::class);
     }
+
+    //Has one category
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    //Has Many Projects
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }
