@@ -27,7 +27,10 @@ class ProjectController extends Controller
         $project->description = $request->description;
         $project->deadline = $request->deadline;
         $project->progress = $request->progress;
-        $project->department_id = $request->department_id;
+        //$project->department_id = $request->department_id;
+        $project->category_id = $request->category_id;
+        $project->start_date = $request->start_date;
+        $project->end_date = $request->end_date;
         $project->status_id = $request->status_id;
         $project->save();
         if ($request->has('employees')) {

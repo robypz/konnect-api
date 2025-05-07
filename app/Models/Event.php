@@ -20,7 +20,7 @@ class Event extends Model
     //belongs to department
     public function department() : BelongsTo
     {
-        return $this->belongsTo(Deparment::class);
+        return $this->belongsTo(Department::class);
     }
 
     //belongs to projects
