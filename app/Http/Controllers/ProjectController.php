@@ -47,11 +47,6 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project->load('status');
-        $project->load('employees');
-        $project->load('category');
-        $project->load('tasks');
-        $project->load('posts');
         return response()->json($project, 200);
     }
 
@@ -60,7 +55,25 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $project->name = $request->name;
+        $project->description = $request->description;
+        $project->deadline = $request->deadline;
+        $project->progress = $request->progress;
+        //$project->department_id = $request->department_id;
+        $project->category_id = $request->category_id;
+        $project->start_date = $request->start_date;
+        $project->end_date = $request->end_date;
+        $project->status_id = $request->status_id;
+        $project->save();
+
+        if ($request->has('employees')) {
+            $project->employees()->detach();
+            foreach ($request->employees as $employee) {
+                $project->employees()->attach($employee['id']);
+            }
+        }
+
+        return response()->json($project, 201);
     }
 
     /**
@@ -68,6 +81,11 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->employees()->detach();
+        $project->tasks()->delete();
+        $project->posts()->comments()->delete();
+        $project->posts()->delete();
+        $project->delete();
+        return response()->json(['message' => 'Project deleted successfully'], 200);
     }
 }

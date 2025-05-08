@@ -14,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::with(['user', 'department'])->cursorPaginate();
+        $employees = Employee::cursorPaginate();
         return response()->json($employees, 200);
     }
 
@@ -49,7 +49,6 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        $employee->load(['user', 'department']);
         return response()->json($employee, 200);
     }
 
@@ -90,7 +89,8 @@ class EmployeeController extends Controller
         return response()->json(null, 204);
     }
 
-    public function search($search){
+    public function search($search)
+    {
         $employees = Employee::with(['user', 'department'])
             ->whereHas('user', function ($query) use ($search) {
                 $query->where('name', 'like', "%$search%")

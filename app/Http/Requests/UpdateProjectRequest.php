@@ -11,7 +11,7 @@ class UpdateProjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,8 +24,15 @@ class UpdateProjectRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'employees_ids' => 'nullable|array',
-            'employees_ids.*' => 'exists:employees,id',
+            'status_id' => 'required|exists:status,id',
+            'progress' => 'required|integer|min:0|max:100',
+            'deadline' => 'required|date|after:start_date',
+            //'deparmentment_id' => 'required|exists:departments,id',
+            'category_id' => 'required|exists:categories,id',
+            'start_date' => 'required|date|before_or_equal:deadline',
+            'status_id' => 'required|exists:statuses,id',
+            'employees' => 'nullable|array',
+            'employees.*.id' => 'exists:employees,id',
         ];
     }
 }

@@ -29,7 +29,7 @@ class StoreProjectRequest extends FormRequest
             'deadline' => 'required|date|after:start_date',
             //'deparmentment_id' => 'required|exists:departments,id',
             'category_id' => 'required|exists:categories,id',
-            'start_date' => 'required|date|after:today',
+            'start_date' => 'required|date|before_or_equal:deadline',
             'status_id' => 'required|exists:statuses,id',
             'employees' => 'nullable|array',
             'employees.*.id' => 'exists:employees,id',

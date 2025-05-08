@@ -12,6 +12,8 @@ class Project extends Model
     /** @use HasFactory<\Database\Factories\ProjectFactory> */
     use HasFactory;
 
+    protected $with = ['status', 'employees', 'category', 'tasks', 'posts'];
+
     //belongs to many employees
     public function employees() : BelongsToMany
     {

@@ -9,6 +9,8 @@ use MongoDB\Laravel\Relations\BelongsToMany;
 
 class Employee extends Model
 {
+    protected $with = ['department','user'];
+
     /** @use HasFactory<\Database\Factories\EmployeeFactory> */
     use HasFactory;
 
