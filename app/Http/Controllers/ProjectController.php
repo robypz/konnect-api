@@ -13,7 +13,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('status')->get();
+        $projects = Project::all();
         return response()->json($projects,200);
     }
 

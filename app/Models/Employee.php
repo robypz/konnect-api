@@ -9,7 +9,7 @@ use MongoDB\Laravel\Relations\BelongsToMany;
 
 class Employee extends Model
 {
-    protected $with = ['department','user'];
+    //protected $with = ['department','user','projects'];
 
     /** @use HasFactory<\Database\Factories\EmployeeFactory> */
     use HasFactory;
@@ -31,4 +31,5 @@ class Employee extends Model
     {
         return $this->belongsToMany(Project::class);
     }
+
 }

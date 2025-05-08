@@ -12,7 +12,7 @@ class Project extends Model
     /** @use HasFactory<\Database\Factories\ProjectFactory> */
     use HasFactory;
 
-    protected $with = ['status', 'employees', 'category', 'tasks', 'posts'];
+    //protected $with = ['status', 'category', 'tasks', 'posts'];
 
     //belongs to many employees
     public function employees() : BelongsToMany
@@ -48,11 +48,5 @@ class Project extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
-    }
-
-    //Has Many Projects
-    public function projects()
-    {
-        return $this->hasMany(Project::class);
     }
 }

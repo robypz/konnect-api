@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $collection) {
             $collection->id();
-            $collection->string('job');
             $collection->timestamps();
         });
     }
