@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -14,7 +15,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        return response()->json($projects,200);
+        return response()->json($projects, 200);
     }
 
     /**
@@ -34,9 +35,7 @@ class ProjectController extends Controller
         $project->status_id = $request->status_id;
         $project->save();
         if ($request->has('employees')) {
-            foreach ($request->employees as $employee) {
-                $project->employees()->attach($employee['id']);
-            }
+            $project->employees()->sync(collect($request->employees)->pluck('id'));
         }
 
         return response()->json($project, 201);
@@ -47,6 +46,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        $project->load(['employees', 'tasks', 'posts']);
         return response()->json($project, 200);
     }
 
@@ -66,12 +66,12 @@ class ProjectController extends Controller
         $project->status_id = $request->status_id;
         $project->save();
 
-        if ($request->has('employees')) {
+        /*if ($request->has('employees')) {
             $project->employees()->detach();
             foreach ($request->employees as $employee) {
                 $project->employees()->attach($employee['id']);
             }
-        }
+        }*/
 
         return response()->json($project, 201);
     }
@@ -87,5 +87,15 @@ class ProjectController extends Controller
         $project->posts()->delete();
         $project->delete();
         return response()->json(['message' => 'Project deleted successfully'], 200);
+    }
+
+    public function updateEmployees(Request $request, Project $project)
+    {
+        $request->validate([
+            'employees' => 'required|array',
+            'employees.*.id' => 'exists:employees,id',
+        ]);
+
+        $project->employees()->sync(collect($request->employees)->pluck('id'));
     }
 }

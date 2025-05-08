@@ -14,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::cursorPaginate();
+        $employees = Employee::with(['department','user'])->cursorPaginate();
         return response()->json($employees, 200);
     }
 
@@ -41,6 +41,8 @@ class EmployeeController extends Controller
 
         $employee->save();
 
+        $employee->load(['user','department']);
+
         return response()->json($employee, 201);
     }
 
@@ -49,6 +51,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
+        $employee->load(['projects']);
         return response()->json($employee, 200);
     }
 
