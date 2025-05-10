@@ -11,7 +11,7 @@ class StoreTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,6 +26,8 @@ class StoreTaskRequest extends FormRequest
             'description' => ['required', 'string'],
             'project_id' => ['required', 'exists:projects,id'],
             'employee_id' => ['required', 'exists:employees,id'],
+            'status_id' => ['required', 'exists:statuses,id'],
+            'deadline' => ['required', 'date'],
         ];
     }
 }

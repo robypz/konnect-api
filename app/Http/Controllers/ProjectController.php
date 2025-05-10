@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Task;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -73,6 +75,8 @@ class ProjectController extends Controller
             }
         }*/
 
+        $project->load('status','category');
+
         return response()->json($project, 201);
     }
 
@@ -96,6 +100,32 @@ class ProjectController extends Controller
             'employees.*.id' => 'exists:employees,id',
         ]);
 
-        $project->employees()->sync(collect($request->employees)->pluck('id'));
+        $project->employees()->detach();
+        foreach ($request->employees as $employee) {
+            $project->employees()->attach($employee['id']);
+        }
+        return response()->json($project->load(['employees']), 200);
+    }
+
+    public function addTask(Request $request, Project $project): JsonResponse
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'employee_id' => ['required', 'exists:employees,id'],
+            'status_id' => ['required', 'exists:statuses,id'],
+            'deadline' => ['required', 'date'],
+        ]);
+
+        $tasks = new Task();
+        $tasks->name = $request->name;
+        $tasks->description = $request->description;
+        $tasks->employee_id = $request->employee_id;
+        $tasks->status_id = $request->status_id;
+        $tasks->deadline = $request->deadline;
+        $tasks->project_id = $project->id;
+        $tasks->save();
+        $project->load('tasks');
+        return response()->json($project, 200);
     }
 }

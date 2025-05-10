@@ -19,6 +19,10 @@ Route::get('employees/search/{search}', [EmployeeController::class, 'search']);
 
 Route::apiResource('statuses',StatusController::class);
 
-Route::apiResource('projects',ProjectController::class);
 
+Route::apiResource('projects',ProjectController::class);
+Route::put('projects/updateEmployees/{project}', [ProjectController::class, 'updateEmployees']);
+Route::post('projects/{project}/addTask', [ProjectController::class, 'addTask']);
+
+Route::apiResource('categories',CategoryController::class);
 Route::apiResource('categories',CategoryController::class);
