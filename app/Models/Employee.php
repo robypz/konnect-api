@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Relations\BelongsTo;
 use MongoDB\Laravel\Relations\BelongsToMany;
+use MongoDB\Laravel\Relations\HasMany;
 
 class Employee extends Model
 {
@@ -30,6 +31,10 @@ class Employee extends Model
     public function projects() : BelongsToMany
     {
         return $this->belongsToMany(Project::class);
+    }
+
+    public function tasks() : HasMany{
+        return $this->hasMany(Task::class);
     }
 
 }

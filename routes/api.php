@@ -5,6 +5,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,7 @@ Route::apiResource('departments',DepartmentController::class);
 
 Route::apiResource('employees',EmployeeController::class);
 Route::get('employees/search/{search}', [EmployeeController::class, 'search']);
+Route::get('employees/{employee}/tasks', [EmployeeController::class, 'tasks']);
 
 Route::apiResource('statuses',StatusController::class);
 
@@ -25,4 +27,4 @@ Route::put('projects/updateEmployees/{project}', [ProjectController::class, 'upd
 Route::post('projects/{project}/addTask', [ProjectController::class, 'addTask']);
 
 Route::apiResource('categories',CategoryController::class);
-Route::apiResource('categories',CategoryController::class);
+Route::apiResource('tasks',TaskController::class);
