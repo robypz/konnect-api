@@ -1,11 +1,5 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\StatusController;
-use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,18 +7,9 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::apiResource('departments',DepartmentController::class);
-
-Route::apiResource('employees',EmployeeController::class);
-Route::get('employees/search/{search}', [EmployeeController::class, 'search']);
-Route::get('employees/{employee}/tasks', [EmployeeController::class, 'tasks']);
-
-Route::apiResource('statuses',StatusController::class);
-
-
-Route::apiResource('projects',ProjectController::class);
-Route::put('projects/updateEmployees/{project}', [ProjectController::class, 'updateEmployees']);
-Route::post('projects/{project}/addTask', [ProjectController::class, 'addTask']);
-
-Route::apiResource('categories',CategoryController::class);
-Route::apiResource('tasks',TaskController::class);
+include 'api/employee/employeeRoutes.php';
+include 'api/task/taskRoutes.php';
+include 'api/category/categoryRoutes.php';
+include 'api/department/departmentRoutes.php';
+include 'api/project/projectRoutes.php';
+include 'api/auth/authRoutes.php';
