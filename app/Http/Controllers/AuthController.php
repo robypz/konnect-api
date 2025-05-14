@@ -33,7 +33,7 @@ class AuthController extends Controller
 
     public function signout() {}
 
-    public function forgotPassword(Request $request)
+    public function sendPasswordResetLink(Request $request)
     {
         $request->validate(['email' => 'required|email']);
 
@@ -41,9 +41,7 @@ class AuthController extends Controller
             $request->only('email')
         );
 
-        return $status === Password::ResetLinkSent
-            ? back()->with(['status' => __($status)])
-            : back()->withErrors(['email' => __($status)]);
+        return response()->json($status,200);
     }
 
     public function resetPassword(Request $request)

@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
         ResetPassword::createUrlUsing(function (User $user, string $token) {
-            return 'localhost:4200/reset-password?token=' . $token;
+            return 'http://localhost:4200/reset-password?token=' . $token;
         });
     }
 }

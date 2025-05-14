@@ -10,6 +10,6 @@ Route::controller(AuthController::class)->prefix('auth')->group(function () {
 Route::controller(AuthController::class)->prefix('auth')->group(function () {
     Route::post('/signin','signin');
     Route::post('/signup','signup');
-    Route::post('/forgot-password','forgotPassword');
-    Route::post('/reset-password','resetPassword');
+    Route::post('/sendPasswordResetLink','sendPasswordResetLink');
+    Route::post('/resetPassword','resetPassword');
 })->middleware('guest');
