@@ -62,4 +62,9 @@ class TaskController extends Controller
     {
         //
     }
+
+    public function byEmployee($employeeId){
+        $tasks = Task::where('employee_id',$employeeId)->with(['status','employee'])->get();
+        return response()->json($tasks,200);
+    }
 }

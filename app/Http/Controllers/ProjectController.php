@@ -128,4 +128,9 @@ class ProjectController extends Controller
         $project->load('tasks');
         return response()->json($project, 200);
     }
+
+    public function byEmployee(string $employeeId){
+        $projects = Project::where('employee_ids',$employeeId)->get();
+        return response()->json($projects,200);
+    }
 }
