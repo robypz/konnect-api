@@ -10,7 +10,6 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Str;
 
 
 class AuthController extends Controller
@@ -41,7 +40,7 @@ class AuthController extends Controller
             $request->only('email')
         );
 
-        return response()->json($status,200);
+        return response()->json($status, 200);
     }
 
     public function resetPassword(Request $request)
@@ -65,6 +64,12 @@ class AuthController extends Controller
             }
         );
 
-        return response()->json($status,200);
+        return response()->json($status, 200);
+    }
+
+    public function user(Request $request)
+    {
+        $user = User::with(['employee'])->find($request->user()->id);
+        return response()->json($user, 200);
     }
 }
