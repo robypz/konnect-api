@@ -57,7 +57,7 @@ class AuthController extends Controller
             function (User $user, string $password) {
                 $user->forceFill([
                     'password' => Hash::make($password)
-                ])->setRememberToken(Str::random(60));
+                ]);
 
                 $user->save();
 
@@ -65,8 +65,6 @@ class AuthController extends Controller
             }
         );
 
-        return $status === Password::PasswordReset
-            ? redirect()->route('login')->with('status', __($status))
-            : back()->withErrors(['email' => [__($status)]]);
+        return response()->json($status,200);
     }
 }
