@@ -11,7 +11,7 @@ class StoreEventRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,9 +24,13 @@ class StoreEventRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'date' => ['required', 'date'],
+            'time' => ['required', 'boolean'],
+            'start_time' => ['required', 'date_format:H:i'],
+            'end_time' => ['required', 'date_format:H:i'],
             'location' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'link' => ['nullable', 'url'],
+            'link' => ['nullable', 'url',],
+            'event_type' => ['required', 'string', 'in:meeting,workshop,social,deadline,other'],
         ];
     }
 }

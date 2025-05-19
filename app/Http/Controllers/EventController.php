@@ -13,15 +13,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $events = Event::cursorPaginate(25);
+        response()->json($events, 200);
     }
 
     /**
@@ -29,21 +22,15 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $event = Event::create($validated);
+        return response()->json($event, 201);
     }
 
     /**
      * Display the specified resource.
      */
     public function show(Event $event)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Event $event)
     {
         //
     }
