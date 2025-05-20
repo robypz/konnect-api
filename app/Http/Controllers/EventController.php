@@ -13,8 +13,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::paginate(25);
-        response()->json($events, 200);
+        $events = Event::cursorPaginate(25);
+        return response()->json($events, 200);
     }
 
     /**
@@ -31,7 +31,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        return response()->json($event,200);
     }
 
     /**

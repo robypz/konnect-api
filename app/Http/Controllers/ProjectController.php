@@ -37,7 +37,7 @@ class ProjectController extends Controller
         $project->status_id = $request->status_id;
         $project->save();
         if ($request->has('employees')) {
-            $project->employees()->sync(collect($request->employees)->pluck('id'));
+            $project->employees()->sync(collect($request->employees)->pluck('id')->toArray());
         }
 
         return response()->json($project, 201);
@@ -75,7 +75,7 @@ class ProjectController extends Controller
             }
         }*/
 
-        $project->load('status','category');
+        $project->load('status', 'category');
 
         return response()->json($project, 201);
     }
@@ -129,8 +129,9 @@ class ProjectController extends Controller
         return response()->json($project, 200);
     }
 
-    public function byEmployee(string $employeeId){
-        $projects = Project::where('employee_ids',$employeeId)->get();
-        return response()->json($projects,200);
+    public function byEmployee(string $employeeId)
+    {
+        $projects = Project::where('employee_ids', $employeeId)->get();
+        return response()->json($projects, 200);
     }
 }
