@@ -13,7 +13,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::cursorPaginate(25);
+        $events = Event::paginate(25);
         response()->json($events, 200);
     }
 
@@ -22,8 +22,7 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        $validated = $request->validated();
-        $event = Event::create($validated);
+        $event = Event::create($request->validated());
         return response()->json($event, 201);
     }
 

@@ -11,6 +11,18 @@ class Event extends Model
     /** @use HasFactory<\Database\Factories\EventFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'date',
+        'time',
+        'start_time',
+        'end_time',
+        'location',
+        'description',
+        'link',
+        'event_type',
+    ];
+
     //belongs to user
     public function user() : BelongsTo
     {

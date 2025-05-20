@@ -13,7 +13,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::with(['status','employee'])->cursorPaginate(25);
+        return response()->json($tasks,200);
     }
 
     /**
