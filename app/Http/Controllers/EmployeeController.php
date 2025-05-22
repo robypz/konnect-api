@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\User;
+use Spatie\Image\Image;
 
 class EmployeeController extends Controller
 {
@@ -23,7 +24,7 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployeeRequest $request)
     {
-        $user = new User();
+        /*$user = new User();
         $user->name = $request->name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
@@ -33,17 +34,30 @@ class EmployeeController extends Controller
         $employee = new Employee();
         $employee->user_id = $user->id;
         $employee->job = $request->job;
-        $employee->department_id = $request->department_id;
+        $employee->department_id = $request->department_id;*/
 
         if ($request->hasFile('profile_photo')) {
-            $employee->profile_photo = $request->file('profile_photo')->store('profile_photos', 'public');
+            // Store original photo
+            $storagePath = $request->file('profile_photo')->store('profile_photos', 'public');
+
+            // create a image with 32x32 size and save it with tha actual name in storage + '-32w'
+            $image = Image::load(storage_path('app/public/' . $storagePath));
+            $image->width(32)->height(32)->save(storage_path('app/public/profile_photos/' . pathinfo($storagePath, PATHINFO_FILENAME) . '-32w.' . pathinfo($storagePath, PATHINFO_EXTENSION)));
+
+            // create a image with 64x64 size and save it with tha actual name in storage + '-64w'
+            $image = Image::load(storage_path('app/public/' . $storagePath));
+            $image->width(64)->height(64)->save(storage_path('app/public/profile_photos/' . pathinfo($storagePath, PATHINFO_FILENAME) . '-64w.' . pathinfo($storagePath, PATHINFO_EXTENSION)));
+
+            // create a image with 128x128 size and save it with tha actual name in storage + '-128w'
+            $image = Image::load(storage_path('app/public/' . $storagePath));
+            $image->width(128)->height(128)->save(storage_path('app/public/profile_photos/' . pathinfo($storagePath, PATHINFO_FILENAME) . '-128w.' . pathinfo($storagePath, PATHINFO_EXTENSION)));
         }
 
-        $employee->save();
+        /*$employee->save();
 
-        $employee->load(['user', 'department']);
+        $employee->load(['user', 'department']);*/
 
-        return response()->json($employee, 201);
+        return response()->json(null, 201);
     }
 
     /**
@@ -123,7 +137,8 @@ class EmployeeController extends Controller
         return response()->json($employee->events, 200);
     }
 
-    public function projects(Employee $employee){
-        return response()->json($employee->projects,200);
+    public function projects(Employee $employee)
+    {
+        return response()->json($employee->projects, 200);
     }
 }
