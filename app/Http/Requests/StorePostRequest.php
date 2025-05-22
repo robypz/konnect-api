@@ -11,7 +11,7 @@ class StorePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,13 +22,12 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
+            'employee_id' => ['required', 'exists:employees,id'],
+            'project_id' => ['nullable', 'exists:projects,id'],
             //multimédia
-            'media' => 'required|file|mimetypes:image/jpeg,image/png,image/gif,video/mp4,video/mpeg|max:10240',
-            //attachments
-            'attachments' => 'nullable|array',
-            'attachments.*' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,txt|max:10240',
+            'media' => 'nullable|array',
+            'media.*' => 'file|mimes:jpg,jpeg,png,gif,mp4,mov,avi|max:2048',
         ];
     }
 }

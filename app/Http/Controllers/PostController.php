@@ -13,15 +13,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $posts = Post::cursorPaginate(10);
+        return response()->json($posts, 200);
     }
 
     /**
@@ -29,7 +22,24 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $post = new Post();
+        $post->content = $request->input('content');
+        $post->employee_id = $request->input('employee_id');
+        $post->project_id = $request->input('project_id');
+
+        // Handle media files if any
+        if ($request->hasFile('media')) {
+            foreach ($request->file('media') as $file) {
+                $post->media[] = [
+                    'path' => $file->store('posts', 'public'),
+                    'type' => $file->getClientMimeType(),
+                ];
+            }
+        }
+
+        $post->save();
+
+        return response()->json($post, 201);
     }
 
     /**
@@ -37,15 +47,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Post $post)
-    {
-        //
+        return response()->json($post, 200);
     }
 
     /**
@@ -53,7 +55,21 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $post->content = $request->input('content');
+
+        // Handle media files if any
+        if ($request->hasFile('media')) {
+            foreach ($request->file('media') as $file) {
+                $post->media[] = [
+                    'path' => $file->store('posts', 'public'),
+                    'type' => $file->getClientMimeType(),
+                ];
+            }
+        }
+
+        $post->save();
+
+        return response()->json($post, 200);
     }
 
     /**
@@ -61,6 +77,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return response()->json(null, 204);
     }
 }
