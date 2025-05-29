@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::cursorPaginate(10);
+        $posts = Post::with(['employee','project','comments','reactions'])->cursorPaginate(10);
         return response()->json($posts, 200);
     }
 
@@ -47,6 +47,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $post->load(['employee','comments','reactions']);
         return response()->json($post, 200);
     }
 
