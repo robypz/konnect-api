@@ -11,3 +11,4 @@ include 'api/project/projectRoutes.php';
 include 'api/auth/authRoutes.php';
 include 'api/event/eventRoutes.php';
 include 'api/status/statusRoutes.php';
+include 'api/post/postRoutes.php';

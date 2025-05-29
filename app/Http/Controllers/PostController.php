@@ -24,7 +24,7 @@ class PostController extends Controller
     {
         $post = new Post();
         $post->content = $request->input('content');
-        $post->employee_id = $request->input('employee_id');
+        $post->employee_id = $request->user()->employee->id;
         $post->project_id = $request->input('project_id');
 
         // Handle media files if any

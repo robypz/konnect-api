@@ -23,9 +23,7 @@ class StorePostRequest extends FormRequest
     {
         return [
             'content' => ['required', 'string'],
-            'employee_id' => ['required', 'exists:employees,id'],
             'project_id' => ['nullable', 'exists:projects,id'],
-            //multimédia
             'media' => 'nullable|array',
             'media.*' => 'file|mimes:jpg,jpeg,png,gif,mp4,mov,avi|max:2048',
         ];
