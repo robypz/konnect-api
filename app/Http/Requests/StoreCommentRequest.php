@@ -11,7 +11,7 @@ class StoreCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,6 +24,7 @@ class StoreCommentRequest extends FormRequest
         return [
             'content' => ['required', 'string'],
             'post_id' => ['required', 'exists:posts,id'],
+            'project_id' => ['nullable','string']
         ];
     }
 }

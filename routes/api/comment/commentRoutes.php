@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::controller(CommentController::class)->prefix('comments')->group(function () {
-        Route::get('/byPost', 'byPost');
+        Route::get('/byPost/{postId}', 'byPost');
         Route::post('/', 'store');
     });
 });

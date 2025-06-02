@@ -32,8 +32,10 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->post_id = $request->post_id;
         $comment->employee_id = $request->user()->employee->id;
+        $comment->content= $request->content;
         
         $comment->save();
+        $comment->load('employee');
         return response()->json($comment,201);
     }
 
@@ -65,7 +67,7 @@ class CommentController extends Controller
     }
 
     public function byPost($postId){
-        $comments = Comment::where('post_id',$postId)->cursorPaginate(25);
+        $comments = Comment::with(['employee'])->where('post_id',$postId)->cursorPaginate(25);
         return response()->json($comments,200);
     }
 }
