@@ -29,7 +29,12 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        //
+        $comment = new Comment();
+        $comment->post_id = $request->post_id;
+        $comment->employee_id = $request->user()->employee->id;
+        
+        $comment->save();
+        return response()->json($comment,201);
     }
 
     /**
@@ -37,23 +42,18 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Comment $comment)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        //
+        $comment->content = $request->content;
+        $comment->save();
+        return response()->json($comment,200);
     }
 
     /**
@@ -62,5 +62,10 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         //
+    }
+
+    public function byPost($postId){
+        $comments = Comment::where('post_id',$postId)->cursorPaginate(25);
+        return response()->json($comments,200);
     }
 }
