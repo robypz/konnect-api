@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Relations\BelongsTo;
+use MongoDB\Laravel\Relations\EmbedsMany;
 use MongoDB\Laravel\Relations\HasMany;
 
 class Post extends Model
@@ -43,9 +44,9 @@ class Post extends Model
     }
 
     //has many reactions
-    public function reactions() : HasMany
+    public function reactions() : EmbedsMany
     {
-        return $this->hasMany(Reaction::class);
+        return $this->embedsMany(Reaction::class);
     }
 
     //has many tags

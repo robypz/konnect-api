@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Reaction;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -13,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with(['employee','project','comments','reactions'])->cursorPaginate(10);
+        $posts = Post::with(['employee', 'project', 'comments', 'reactions'])->cursorPaginate(10);
         return response()->json($posts, 200);
     }
 
@@ -47,7 +49,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post->load(['employee','comments','reactions']);
+        $post->load(['employee', 'comments', 'reactions']);
         return response()->json($post, 200);
     }
 
@@ -81,5 +83,15 @@ class PostController extends Controller
         $post->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function like(Request $request, Post $post)
+    {
+        $reaction = new Reaction([
+            'type' => 'like',
+            'employee_id' => $request->user()->employee->id,
+        ]);
+
+        $post->reactions()->attach($reaction);
     }
 }

@@ -33,8 +33,14 @@ class Employee extends Model
         return $this->belongsToMany(Project::class);
     }
 
-    public function tasks() : HasMany{
+    public function tasks() : HasMany
+    {
         return $this->hasMany(Task::class);
+    }
+
+    public function reactions() : HasMany
+    {
+        return $this->hasMany(Reaction::class);
     }
 
 }

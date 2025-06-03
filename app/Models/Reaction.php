@@ -11,9 +11,9 @@ class Reaction extends Model
     /** @use HasFactory<\Database\Factories\ReactionsFactory> */
     use HasFactory;
 
-    //belongs to post
-    public function post() : BelongsTo
+    //belongs to employee
+    public function employee () : BelongsTo
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Employee::class);
     }
 }
