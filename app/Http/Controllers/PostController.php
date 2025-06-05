@@ -85,13 +85,20 @@ class PostController extends Controller
         return response()->json(null, 204);
     }
 
-    public function like(Request $request, Post $post)
+    public function react(Request $request, Post $post)
     {
-        $reaction = new Reaction([
-            'type' => 'like',
-            'employee_id' => $request->user()->employee->id,
-        ]);
 
-        $post->reactions()->attach($reaction);
+        $reaction = $post->reactions()->where('type', $request->type)->where('employee_id', $request->user()->employee->id)->first();
+
+        if ($reaction) {
+            $post->reactions()->detach($reaction);
+        } else {
+            $reaction = new Reaction();
+            $reaction->type = $request->type;
+            $reaction->employee_id = $request->user()->employee->id;
+            $reaction = $post->reactions()->attach($reaction);
+        }
+
+        return response()->json($reaction, 200);
     }
 }
