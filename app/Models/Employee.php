@@ -10,37 +10,41 @@ use MongoDB\Laravel\Relations\HasMany;
 
 class Employee extends Model
 {
-    protected $with = ['department','user'];
+    protected $with = ['department', 'user'];
 
     /** @use HasFactory<\Database\Factories\EmployeeFactory> */
     use HasFactory;
 
     //belongs to user
-    public function user() : BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
     //belongs to department
-    public function department() : BelongsTo
+    public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
     }
 
     //belogn to many projects
-    public function projects() : BelongsToMany
+    public function projects(): BelongsToMany
     {
         return $this->belongsToMany(Project::class);
     }
 
-    public function tasks() : HasMany
+    public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
     }
 
-    public function reactions() : HasMany
+    public function reactions(): HasMany
     {
         return $this->hasMany(Reaction::class);
     }
 
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class);
+    }
 }
