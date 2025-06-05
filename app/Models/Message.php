@@ -9,7 +9,7 @@ class Message extends Model
 {
     function sender(): BelongsTo
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(Employee::class,'sender_id');
     }
 
     function chat(): BelongsTo
