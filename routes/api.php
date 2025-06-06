@@ -13,5 +13,5 @@ include 'api/event/eventRoutes.php';
 include 'api/status/statusRoutes.php';
 include 'api/post/postRoutes.php';
 include 'api/comment/commentRoutes.php';
-include 'api/role/messageRoutes.php';
-include 'api/role/chatRoutes.php';
+include 'api/message/messageRoutes.php';
+include 'api/chat/chatRoutes.php';

@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Request;
 use Spatie\Image\Image;
 
 class EmployeeController extends Controller
@@ -106,16 +107,18 @@ class EmployeeController extends Controller
         return response()->json(null, 204);
     }
 
-    public function search($search)
+    public function search(Request $request)
     {
+        $request->validate([
+            'search' => 'required|string|min:3'
+        ]);
+
+        $search = $request->input('search');
         $employees = Employee::with(['user', 'department'])
             ->whereHas('user', function ($query) use ($search) {
                 $query->where('name', 'like', "%$search%")
                     ->orWhere('last_name', 'like', "%$search%")
                     ->orWhere('email', 'like', "%$search%");
-            })
-            ->orWhereHas('department', function ($query) use ($search) {
-                $query->where('name', 'like', "%$search%");
             })
             ->cursorPaginate();
 
