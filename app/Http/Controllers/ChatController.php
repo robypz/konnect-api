@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Chat\StoreChatRequest;
 use App\Models\Chat;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,16 @@ class ChatController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreChatRequest $request)
     {
-        //
+        $chat = new Chat();
+        $chat->type = $request->type;
+        $chat->save();
+        foreach ($request->participants as $participant){
+            $chat->employees()->attach($participant['id']);
+        }
+
+        return response()->json($chat,201);
     }
 
     /**
@@ -28,7 +36,7 @@ class ChatController extends Controller
      */
     public function show(Chat $chat)
     {
-        //
+
     }
 
     /**
