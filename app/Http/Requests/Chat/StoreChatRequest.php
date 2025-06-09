@@ -23,8 +23,8 @@ class StoreChatRequest extends FormRequest
     {
         return [
             'type' => 'required|string|in:individual,group',
-            'participants' => 'required|array',
-            'participants.*.id' => 'required|string|exists:employees,id',
+            'employees' => 'required|array',
+            'employees.*.id' => 'required|string|exists:employees,id',
         ];
     }
 }

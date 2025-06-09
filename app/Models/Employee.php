@@ -10,7 +10,7 @@ use MongoDB\Laravel\Relations\HasMany;
 
 class Employee extends Model
 {
-    protected $with = ['department', 'user'];
+    //protected $with = ['department', 'user'];
 
     /** @use HasFactory<\Database\Factories\EmployeeFactory> */
     use HasFactory;
@@ -43,8 +43,8 @@ class Employee extends Model
         return $this->hasMany(Reaction::class);
     }
 
-    public function messages(): HasMany
+    public function chats(): BelongsToMany
     {
-        return $this->hasMany(Message::class);
+        return $this->belongsToMany(chat::class);
     }
 }

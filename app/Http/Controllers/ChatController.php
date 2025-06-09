@@ -24,8 +24,9 @@ class ChatController extends Controller
         $chat = new Chat();
         $chat->type = $request->type;
         $chat->save();
-        foreach ($request->participants as $participant){
-            $chat->employees()->attach($participant['id']);
+        $chat->employees()->attach(auth()->user()->employee->id);
+        foreach ($request->employees as $employee){
+            $chat->employees()->attach($employee['id']);
         }
 
         return response()->json($chat,201);
@@ -37,6 +38,12 @@ class ChatController extends Controller
     public function show(Chat $chat)
     {
 
+    }
+
+    public function byEmployee(){
+        $chats = auth()->user()->employee->chats;
+        $chats->load('employees.user');
+        return response()->json($chats,200);
     }
 
     /**
