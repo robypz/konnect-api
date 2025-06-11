@@ -25,7 +25,7 @@ class MessageController extends Controller
     {
         $message = new Message();
         $message->content = $request->content;
-        $message->sender_id = $request->sender_id;
+        $message->employee_id = $request->sender_id;
         $message->chat_id = $request->chat_id;
         $message->save();
 
@@ -37,7 +37,7 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        
+
     }
 
     /**

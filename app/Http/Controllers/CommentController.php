@@ -33,9 +33,9 @@ class CommentController extends Controller
         $comment->post_id = $request->post_id;
         $comment->employee_id = $request->user()->employee->id;
         $comment->content= $request->content;
-        
+
         $comment->save();
-        $comment->load('employee');
+        $comment->load('employee.user');
         return response()->json($comment,201);
     }
 
@@ -44,7 +44,7 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        
+
     }
 
 
@@ -67,7 +67,7 @@ class CommentController extends Controller
     }
 
     public function byPost($postId){
-        $comments = Comment::with(['employee'])->where('post_id',$postId)->cursorPaginate(25);
+        $comments = Comment::with(['employee.user'])->where('post_id',$postId)->cursorPaginate(25);
         return response()->json($comments,200);
     }
 }

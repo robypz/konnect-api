@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with(['employee', 'project', 'comments', 'reactions'])->cursorPaginate(10);
+        $posts = Post::with(['employee.user', 'project', 'comments', 'reactions'])->cursorPaginate(10);
         return response()->json($posts, 200);
     }
 

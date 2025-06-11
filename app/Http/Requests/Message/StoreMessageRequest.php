@@ -11,7 +11,7 @@ class StoreMessageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,7 @@ class StoreMessageRequest extends FormRequest
     {
         return [
             'content' => " required|string",
-            'sender_id' => "required|exists:employees,id",
+            'employee_id' => "required|exists:employees,id",
             'chat_id' => "required|exists:chats,id",
         ];
     }
