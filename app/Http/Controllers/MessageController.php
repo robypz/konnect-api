@@ -25,7 +25,7 @@ class MessageController extends Controller
     {
         $message = new Message();
         $message->content = $request->content;
-        $message->employee_id = $request->sender_id;
+        $message->employee_id = $request->employee_id;
         $message->chat_id = $request->chat_id;
         $message->save();
 
