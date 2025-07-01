@@ -6,6 +6,7 @@ use App\Http\Requests\Message\StoreMessageRequest;
 use App\Http\Requests\Message\UpdateMessage;
 use App\Http\Requests\Message\UpdateMessageRequest;
 use App\Models\Message;
+use App\Notifications\MessageNotification;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -28,6 +29,12 @@ class MessageController extends Controller
         $message->employee_id = $request->employee_id;
         $message->chat_id = $request->chat_id;
         $message->save();
+
+        foreach ($message->chat->employees as $employee) {
+            if ($employee->id != $message->employee_id) {
+               $employee->user->notify(new MessageNotification($message));
+            }
+        }
 
         return response()->json($message,200);
     }
