@@ -31,7 +31,9 @@ class MessageController extends Controller
         $message->save();
 
         foreach ($message->chat->employees as $employee) {
-            $employee->user->notify(new MessageNotification($message));
+            if ($employee->id != $request->employee_id) {
+                $employee->user->notify(new MessageNotification($message));
+            }
         }
 
         return response()->json($message,200);

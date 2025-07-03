@@ -274,4 +274,10 @@
             <div class="h-14.5 hidden lg:block"></div>
         @endif
     </body>
+    <script type="module">
+        Echo.channel('App.Models.User.681c5425f039ff2adb089e54')
+          .notification((notification) => {
+            console.log('Notificación recibida:', notification);
+          });
+    </script>
 </html>

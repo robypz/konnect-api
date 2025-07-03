@@ -50,14 +50,14 @@ class MessageNotification extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            "message" => $this->message
         ];
     }
 
     public function toBroadcast(object $notifiable): BroadcastMessage
-{
-    return new BroadcastMessage([
-        "message" => $this->message
-    ]);
-}
+    {
+        return new BroadcastMessage([
+            "message" => $this->message
+        ]);
+    }
 }
