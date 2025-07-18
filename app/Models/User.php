@@ -10,7 +10,6 @@ use Laravel\Sanctum\HasApiTokens;
 use MongoDB\Laravel\Relations\BelongsToMany;
 use MongoDB\Laravel\Relations\HasMany;
 use MongoDB\Laravel\Relations\HasOne;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
