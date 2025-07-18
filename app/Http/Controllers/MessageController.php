@@ -31,7 +31,7 @@ class MessageController extends Controller
         $message->save();
 
         foreach ($message->chat->employees as $employee) {
-            if ($employee->id != $request->employee_id) {
+            if ($employee->id !== $request->employee_id) {
                 $employee->user->notify(new MessageNotification($message));
             }
         }
@@ -65,7 +65,7 @@ class MessageController extends Controller
 
     public function byChat($chatId)
     {
-        $messages = Message::where('chat_id',$chatId)->cursorPaginate();
+        $messages = Message::where('chat_id',$chatId)->orderBy('created_at','desc')->cursorPaginate();
         return response()->json($messages,200);
     }
 }

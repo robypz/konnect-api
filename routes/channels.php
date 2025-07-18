@@ -3,5 +3,5 @@
 use Illuminate\Support\Facades\Broadcast;
 
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (string) $user->getKey() === (string) $id;
+    return (string) $user->id === (string) $id;
 });

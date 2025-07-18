@@ -48,7 +48,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project->load(['employees', 'tasks', 'posts']);
+        $project->load(['employees.user', 'tasks', 'posts']);
         return response()->json($project, 200);
     }
 

@@ -29,6 +29,7 @@ class ChatController extends Controller
             $chat->employees()->attach($employee['id']);
         }
 
+        $chat->load('employees.user');
         return response()->json($chat,201);
     }
 
