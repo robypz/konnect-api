@@ -14,7 +14,7 @@ class RolesAndPermissionSeeder extends Seeder
     public function run(): void
     {
         Role::insert([
-            ['name' => 'admin'],
+            ['name' => 'root'],
             ['name' => 'employee'],
         ]);
     }
