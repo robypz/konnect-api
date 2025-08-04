@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'name' => 'root',
             'last_name' => 'Konnect',
-            'email' => 'root@konnect.com',
-        ])->roles()->attach(Role::where('name', 'root')->first());
+            'email' => 'root@konnect.test',
+        ])->assignRole(['root']);
     }
 }
