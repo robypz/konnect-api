@@ -1,20 +1,15 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use Src\Identity\Infrastructure\Http\Controllers\Commands\SignInController;
+use Src\Identity\Infrastructure\Http\Controllers\Queries\GetAuthenticatedUserController;
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::controller(AuthController::class)->prefix('auth')->group(function () {
-        Route::post('/signout', 'signout');
-        Route::get('/user', 'user');
+    Route::prefix('auth')->group(function () {
+        Route::get('/user', GetAuthenticatedUserController::class);
     });
 });
 
-
-
-Route::controller(AuthController::class)->prefix('auth')->group(function () {
-    Route::post('/signin', 'signin');
-    Route::post('/signup', 'signup');
-    Route::post('/sendPasswordResetLink', 'sendPasswordResetLink');
-    Route::post('/resetPassword', 'resetPassword');
+Route::prefix('auth')->group(function () {
+    Route::post('/signin', SignInController::class);
 })->middleware('guest');
