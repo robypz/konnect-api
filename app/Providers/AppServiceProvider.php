@@ -7,6 +7,8 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Src\Identity\Domain\Repositories\UserRepositoryInterface;
+use Src\Identity\Infrastructure\Repositories\EloquentUserRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(UserRepositoryInterface::class, EloquentUserRepository::class);
     }
 
     /**
