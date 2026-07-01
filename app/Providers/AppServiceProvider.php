@@ -140,6 +140,70 @@ class AppServiceProvider extends ServiceProvider
                 return new \Src\Projects\Application\Handlers\ListProjectsByEmployeeQueryHandler();
             }
         );
+
+        // Collaboration Handlers
+        $this->app->bind(
+            \Src\Collaboration\Application\Handlers\CreatePostCommandHandler::class,
+            function ($app) {
+                return new \Src\Collaboration\Application\Handlers\CreatePostCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Collaboration\Application\Handlers\UpdatePostCommandHandler::class,
+            function ($app) {
+                return new \Src\Collaboration\Application\Handlers\UpdatePostCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Collaboration\Application\Handlers\DeletePostCommandHandler::class,
+            function ($app) {
+                return new \Src\Collaboration\Application\Handlers\DeletePostCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Collaboration\Application\Handlers\ReactToPostCommandHandler::class,
+            function ($app) {
+                return new \Src\Collaboration\Application\Handlers\ReactToPostCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Collaboration\Application\Handlers\CreateCommentCommandHandler::class,
+            function ($app) {
+                return new \Src\Collaboration\Application\Handlers\CreateCommentCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Collaboration\Application\Handlers\DeleteCommentCommandHandler::class,
+            function ($app) {
+                return new \Src\Collaboration\Application\Handlers\DeleteCommentCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Collaboration\Application\Handlers\ListPostsQueryHandler::class,
+            function ($app) {
+                return new \Src\Collaboration\Application\Handlers\ListPostsQueryHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Collaboration\Application\Handlers\GetPostByIdQueryHandler::class,
+            function ($app) {
+                return new \Src\Collaboration\Application\Handlers\GetPostByIdQueryHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Collaboration\Application\Handlers\ListCommentsQueryHandler::class,
+            function ($app) {
+                return new \Src\Collaboration\Application\Handlers\ListCommentsQueryHandler();
+            }
+        );
     }
 
     /**
