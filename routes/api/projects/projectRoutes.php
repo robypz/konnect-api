@@ -20,4 +20,3 @@ Route::prefix('projects')->group(function () {
     Route::post('/{projectId}/tasks', AddTaskToProjectController::class)->name('projects.addTask');
     Route::get('/employees/{employeeId}', ListProjectsByEmployeeController::class)->name('projects.byEmployee');
 });
-

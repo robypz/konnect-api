@@ -83,6 +83,63 @@ class AppServiceProvider extends ServiceProvider
                 return new \Src\HR\Application\Handlers\GetDepartmentByIdQueryHandler();
             }
         );
+
+        // Projects Handlers
+        $this->app->bind(
+            \Src\Projects\Application\Handlers\CreateProjectCommandHandler::class,
+            function ($app) {
+                return new \Src\Projects\Application\Handlers\CreateProjectCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Projects\Application\Handlers\UpdateProjectCommandHandler::class,
+            function ($app) {
+                return new \Src\Projects\Application\Handlers\UpdateProjectCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Projects\Application\Handlers\DeleteProjectCommandHandler::class,
+            function ($app) {
+                return new \Src\Projects\Application\Handlers\DeleteProjectCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Projects\Application\Handlers\UpdateProjectEmployeesCommandHandler::class,
+            function ($app) {
+                return new \Src\Projects\Application\Handlers\UpdateProjectEmployeesCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Projects\Application\Handlers\AddTaskToProjectCommandHandler::class,
+            function ($app) {
+                return new \Src\Projects\Application\Handlers\AddTaskToProjectCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Projects\Application\Handlers\ListProjectsQueryHandler::class,
+            function ($app) {
+                return new \Src\Projects\Application\Handlers\ListProjectsQueryHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Projects\Application\Handlers\GetProjectByIdQueryHandler::class,
+            function ($app) {
+                return new \Src\Projects\Application\Handlers\GetProjectByIdQueryHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Projects\Application\Handlers\ListProjectsByEmployeeQueryHandler::class,
+            function ($app) {
+                return new \Src\Projects\Application\Handlers\ListProjectsByEmployeeQueryHandler();
+            }
+        );
     }
 
     /**
