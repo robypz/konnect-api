@@ -1,0 +1,44 @@
+# Directories and files
+node_modules/
+vendor/
+.git/
+.gitignore
+.gitattributes
+.editorconfig
+
+# Development files
+.env.*.local
+*.local
+.DS_Store
+Thumbs.db
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.sublime-project
+.sublime-workspace
+
+# Testing and coverage
+coverage/
+.phpunit.cache
+build/
+
+# OS
+.env
+.DS_Store
+Thumbs.db
+
+# Large files
+*.log
+*.tar.gz
+*.zip
+
+# Documentation
+devdocs/
+README.md
+
+# Keep node/package files for build
+
