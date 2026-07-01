@@ -18,6 +18,71 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(UserRepositoryInterface::class, EloquentUserRepository::class);
+
+        // HR Handlers
+        $this->app->bind(
+            \Src\HR\Application\Handlers\GetEmployeeTasksQueryHandler::class,
+            function ($app) {
+                return new \Src\HR\Application\Handlers\GetEmployeeTasksQueryHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\HR\Application\Handlers\GetEmployeePostsQueryHandler::class,
+            function ($app) {
+                return new \Src\HR\Application\Handlers\GetEmployeePostsQueryHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\HR\Application\Handlers\GetEmployeeEventsQueryHandler::class,
+            function ($app) {
+                return new \Src\HR\Application\Handlers\GetEmployeeEventsQueryHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\HR\Application\Handlers\GetEmployeeProjectsQueryHandler::class,
+            function ($app) {
+                return new \Src\HR\Application\Handlers\GetEmployeeProjectsQueryHandler();
+            }
+        );
+
+        // Department Handlers
+        $this->app->bind(
+            \Src\HR\Application\Handlers\CreateDepartmentCommandHandler::class,
+            function ($app) {
+                return new \Src\HR\Application\Handlers\CreateDepartmentCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\HR\Application\Handlers\UpdateDepartmentCommandHandler::class,
+            function ($app) {
+                return new \Src\HR\Application\Handlers\UpdateDepartmentCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\HR\Application\Handlers\DeleteDepartmentCommandHandler::class,
+            function ($app) {
+                return new \Src\HR\Application\Handlers\DeleteDepartmentCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\HR\Application\Handlers\ListDepartmentsQueryHandler::class,
+            function ($app) {
+                return new \Src\HR\Application\Handlers\ListDepartmentsQueryHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\HR\Application\Handlers\GetDepartmentByIdQueryHandler::class,
+            function ($app) {
+                return new \Src\HR\Application\Handlers\GetDepartmentByIdQueryHandler();
+            }
+        );
     }
 
     /**
