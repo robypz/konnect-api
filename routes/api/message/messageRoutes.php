@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
+use Src\Communication\Infrastructure\Http\Controllers\Commands\CreateMessageController;
+use Src\Communication\Infrastructure\Http\Controllers\Commands\DeleteMessageController;
+use Src\Communication\Infrastructure\Http\Controllers\Queries\ListMessagesController;
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::controller(MessageController::class)->prefix('messages')->group(function () {
-        Route::get('/byChat/{chatId}', 'byChat');
-        Route::post('/', 'store');
-    });
+Route::prefix('messages')->group(function () {
+    Route::post('/{chatId}', CreateMessageController::class)->name('messages.store');
+    Route::get('/{chatId}', ListMessagesController::class)->name('messages.index');
+    Route::delete('/{messageId}', DeleteMessageController::class)->name('messages.destroy');
 });

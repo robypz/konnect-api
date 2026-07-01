@@ -204,6 +204,56 @@ class AppServiceProvider extends ServiceProvider
                 return new \Src\Collaboration\Application\Handlers\ListCommentsQueryHandler();
             }
         );
+
+        // Communication Handlers
+        $this->app->bind(
+            \Src\Communication\Application\Handlers\CreateChatCommandHandler::class,
+            function ($app) {
+                return new \Src\Communication\Application\Handlers\CreateChatCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Communication\Application\Handlers\DeleteChatCommandHandler::class,
+            function ($app) {
+                return new \Src\Communication\Application\Handlers\DeleteChatCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Communication\Application\Handlers\CreateMessageCommandHandler::class,
+            function ($app) {
+                return new \Src\Communication\Application\Handlers\CreateMessageCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Communication\Application\Handlers\DeleteMessageCommandHandler::class,
+            function ($app) {
+                return new \Src\Communication\Application\Handlers\DeleteMessageCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Communication\Application\Handlers\ListChatsQueryHandler::class,
+            function ($app) {
+                return new \Src\Communication\Application\Handlers\ListChatsQueryHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Communication\Application\Handlers\GetChatByIdQueryHandler::class,
+            function ($app) {
+                return new \Src\Communication\Application\Handlers\GetChatByIdQueryHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Communication\Application\Handlers\ListMessagesQueryHandler::class,
+            function ($app) {
+                return new \Src\Communication\Application\Handlers\ListMessagesQueryHandler();
+            }
+        );
     }
 
     /**
