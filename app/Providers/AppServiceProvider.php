@@ -254,6 +254,42 @@ class AppServiceProvider extends ServiceProvider
                 return new \Src\Communication\Application\Handlers\ListMessagesQueryHandler();
             }
         );
+
+        // Events Handlers
+        $this->app->bind(
+            \Src\Events\Application\Handlers\CreateEventCommandHandler::class,
+            function ($app) {
+                return new \Src\Events\Application\Handlers\CreateEventCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Events\Application\Handlers\UpdateEventCommandHandler::class,
+            function ($app) {
+                return new \Src\Events\Application\Handlers\UpdateEventCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Events\Application\Handlers\DeleteEventCommandHandler::class,
+            function ($app) {
+                return new \Src\Events\Application\Handlers\DeleteEventCommandHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Events\Application\Handlers\ListEventsQueryHandler::class,
+            function ($app) {
+                return new \Src\Events\Application\Handlers\ListEventsQueryHandler();
+            }
+        );
+
+        $this->app->bind(
+            \Src\Events\Application\Handlers\GetEventByIdQueryHandler::class,
+            function ($app) {
+                return new \Src\Events\Application\Handlers\GetEventByIdQueryHandler();
+            }
+        );
     }
 
     /**
