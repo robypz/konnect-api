@@ -15,7 +15,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
         "mongodb/laravel-mongodb": "^5.2",
-        "robypz/laravel-mongo-roles": "^1.0",
+        "robypz/laravel-mongo-roles": "^2.0",
         "spatie/image": "^3.8"
     },
     "require-dev": {
